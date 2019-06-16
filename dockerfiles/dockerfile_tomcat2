@@ -1,0 +1,19 @@
+FROM ubuntu
+
+RUN apt-get -y update
+RUN apt-get -y install openjdk-8-jdk wget
+RUN mkdir /opt/tomcat
+#This time i am copying tomcat.tar.gz file from my local machine, because some time you may get into conditione where internet will
+#not be enabled for your server to connect to outside world, so in such scenerio we should move with copy 
+
+COPY tomcat.tar.gz /tmp 
+
+RUN cd /tmp && tar xvfz tomcat.tar.gz
+RUN cp -Rv /tmp/apache-tomcat-8.5.37/* /opt/tomcat/
+#Copying myapp.war file which i need to deploy in tomcat server
+COPY myapp.war /opt/tomcat/webapps/
+# Removing the tar file after extraction
+RUN rm /tmp/tomcat.tar.gz
+
+EXPOSE 8080
+CMD /opt/tomcat/bin/catalina.sh run

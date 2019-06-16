@@ -1,0 +1,11 @@
+FROM ubuntu:16.04
+
+RUN apt-get update
+RUN apt-get install -y nginx 
+RUN mkdir /tmp/DevOps_G
+RUN touch /tmp/DevOps_G/amit
+
+EXPOSE 80
+CMD /usr/sbin/nginx -g "daemon off;"
+#Note: There can be only one cmd command in a docker file, if multiple lines present then dockerfile will consider only last cmd present.
+
