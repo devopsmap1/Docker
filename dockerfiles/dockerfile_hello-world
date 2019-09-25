@@ -1,0 +1,6 @@
+FROM alpine
+LABEL maintainer="AMIT AGRAWAL"
+LABEL version=3.0
+ADD https://github.com/devopsg1/Docker/blob/master/dockerfiles/hello?raw=true /
+RUN chmod +x /hello
+CMD ["/hello"]
